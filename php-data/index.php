@@ -1,7 +1,5 @@
 <?php 
 include 'dbconn.php';
-
-
 ?>
 
 <!DOCTYPE html>
@@ -17,10 +15,10 @@ include 'dbconn.php';
 	<div class="addbox">
 		<form method="post" action="add.php">
 			<label>Name</label>
-			<input type="text" name="name" id="name"></input>
+			<input type="text" name="name" id="name" required></input>
 			<br>
 			<label>Message</label>
-			<input type="text" name="message" id="message"></input>
+			<input type="text" name="message" id="message" required></input>
 			<br>
 			<input type="submit" value="submit">
         </form>
@@ -29,7 +27,10 @@ include 'dbconn.php';
 		<div class="boxes">
 			<h3><?php echo $user['name']?></h3>
 			<p><?php echo $user['message']?></p>
+			<button id="<?php echo $user['id']?>" onclick="redirectionToDelete(this)">Ta bort</button>
+			<button id="<?php echo $user['id']?>" onclick="redirectionToEdit(this)">Ändra</button>
 		</div>
 	<?php endwhile ?>
+	<script src="scripts.js"></script>
 </body>
 </html>
