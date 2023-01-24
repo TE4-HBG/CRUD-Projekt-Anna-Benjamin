@@ -1,17 +1,7 @@
 <?php 
+include 'dbconn.php';
 
-$server="mariadb";
-$user="root";
-$pwd="example";
-$schema="docker";
 
-$mysqli=new mysqli($server, $user, $pwd, $schema);
-
-$query = "select * from users";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-
-$results = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -25,13 +15,15 @@ $results = $stmt->get_result();
 </head>
 <body>
 	<div class="addbox">
-		<forms>
+		<form method="post" action="add.php">
 			<label>Name</label>
-			<input></input>
+			<input type="text" name="name" id="name"></input>
 			<br>
 			<label>Message</label>
-			<input></input>
-        </forms>
+			<input type="text" name="message" id="message"></input>
+			<br>
+			<input type="submit" value="submit">
+        </form>
     </div>
 	<?php while ($user = $results->fetch_assoc()): ?>
 		<div class="boxes">
@@ -39,21 +31,5 @@ $results = $stmt->get_result();
 			<p><?php echo $user['message']?></p>
 		</div>
 	<?php endwhile ?>
-	<!--<table>
-		<thead>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Message</th>
-		</thead>
-		<tbody>
-			<!?php while ($user = $results->fetch_assoc()): ?>
-				<tr>
-					<td><!?php echo $user['id']?></td>
-					<td><!?php echo $user['name']?></td>
-					<td><!?php echo $user['message']?></td>
-				</tr>
-			<!?php endwhile ?>
-		</tbody>
-	</table>-->
 </body>
 </html>
