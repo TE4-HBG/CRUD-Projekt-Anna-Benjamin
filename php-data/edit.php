@@ -2,18 +2,18 @@
 include 'dbconn.php';
 
 $userId = $_GET['id'];
-$sql = "SELECT name, message FROM users WHERE id=$userId";
+$sql = "SELECT title, message FROM users WHERE id=$userId";
 $result = $mysqli->query($sql);
 $data = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || !empty($_POST)) {
-    $name = $_POST['name'];
+    $title = $_POST['title'];
     $message = $_POST['message'];
 
-    $sql = "UPDATE users SET name='$name', message='$message' WHERE id=$userId";
+    $sql = "UPDATE users SET title='$title', message='$message' WHERE id=$userId";
     mysqli_query($mysqli, $sql);
 
-    header("Location: http://localhost:8080/");
+    header("Location: http://localhost:8080/main.php");
 }
 
 ?>
@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || !empty($_POST)) {
 <body>
 	<div class="addbox">
 		<form method="post" action="edit.php?id=<?php echo $userId ?>">
-			<label>Name</label>
-			<input type="text" name="name" id="name" value="<?php echo $data["name"] ?>" required></input>
+			<label>title</label>
+			<input type="text" name="title" id="title" value="<?php echo $data["title"] ?>" required></input>
 			<br>
 			<label>Message</label>
 			<input type="text" name="message" id="message" value="<?php echo $data["message"] ?>" required></input>

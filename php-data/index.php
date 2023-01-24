@@ -1,5 +1,11 @@
 <?php 
-include 'dbconn.php';
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || !empty($_POST)) {
+    $_SESSION["user"] = $_POST["username"];
+
+    header("Location: http://localhost:8080/main.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,25 +18,13 @@ include 'dbconn.php';
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<div class="addbox">
-		<form method="post" action="add.php">
-			<label>Name</label>
-			<input type="text" name="name" id="name" required></input>
-			<br>
-			<label>Message</label>
-			<input type="text" name="message" id="message" required></input>
-			<br>
-			<input type="submit" value="submit">
+    <div class="boxes">
+        <form method="post" action="index.php">
+            <label>Username:</label>
+            <input type="text" name="username" id="username" required></input>
+            <br>
+            <input type="submit" value="submit">
         </form>
     </div>
-	<?php while ($user = $results->fetch_assoc()): ?>
-		<div class="boxes">
-			<h3><?php echo $user['name']?></h3>
-			<p><?php echo $user['message']?></p>
-			<button id="<?php echo $user['id']?>" onclick="redirectionToDelete(this)">Ta bort</button>
-			<button id="<?php echo $user['id']?>" onclick="redirectionToEdit(this)">Ändra</button>
-		</div>
-	<?php endwhile ?>
-	<script src="scripts.js"></script>
 </body>
 </html>

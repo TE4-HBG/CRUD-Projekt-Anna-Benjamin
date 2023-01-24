@@ -7,5 +7,5 @@ $sql = "DELETE FROM users WHERE id=$userId";
 
 mysqli_query($mysqli, $sql);
 
-header("Location: http://localhost:8080/");
+header("Location: http://localhost:8080/main.php");
 ?>
