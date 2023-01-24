@@ -1,0 +1,43 @@
+version: '3'
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 8080:80
+    networks:
+      - internal
+    volumes:
+      - ./php-data/:/var/www/html/
+      - ./logs/nginx:/var/log/nginx
+
+  php:
+    build: 
+      context: .
+      dockerfile: php-fpm/Dockerfile
+    networks:
+      - internal
+    volumes:
+      - ./php-data/:/var/www/html/
+      - ./logs/php.log:/var/log/fpm-php.www.log
+      
+  mariadb:
+    image: mariadb:10
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+    networks:
+      - internal
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
