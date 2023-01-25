@@ -8,9 +8,7 @@ $schema="docker";
 
 $mysqli=new mysqli($server, $user, $pwd, $schema);
 
-$query = "SELECT * FROM users WHERE username=$username";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
+$query = "SELECT id, title, message FROM users WHERE username='$username'";
 
-$results = $stmt->get_result();
+$results = mysqli_query($mysqli, $query);
 ?>

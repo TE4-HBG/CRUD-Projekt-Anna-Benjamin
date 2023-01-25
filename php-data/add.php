@@ -1,7 +1,8 @@
 <?php 
+session_start();
 include 'dbconn.php';
 
-$username = "Benne";
+$username = $_SESSION['user'];
 $title = $_POST["title"];
 $message = $_POST["message"];
 
