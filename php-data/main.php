@@ -13,17 +13,21 @@ include 'dbconn.php';
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
 	<div class="addbox">
-		<h2>Användare: <?php echo $_SESSION["user"]?></h2>
-		<form method="post" action="add.php">
-			<label>Title</label>
-			<input type="text" name="title" id="title" required></input>
-			<br>
-			<label>Message</label>
-			<input type="text" name="message" id="message" required></input>
-			<br>
-			<input type="submit" value="submit">
-        </form>
+		<div>
+			<h2>Användare: <?php echo $_SESSION["user"]?></h2>
+			<form method="post" action="add.php">
+				<label>Title</label>
+				<input type="text" name="title" id="title" required></input>
+				<br>
+				<label>Message</label>
+				<input type="text" name="message" id="message" required></input>
+				<br>
+				<input type="submit" value="submit">
+			</form>
+		</div>
+		<button onclick="logOut()" class="logOutBtn">Logga ut</button>
     </div>
 	<?php while ($user = $results->fetch_assoc()): ?>
 		<div class="boxes">

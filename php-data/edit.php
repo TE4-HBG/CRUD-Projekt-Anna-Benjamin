@@ -11,8 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || !empty($_POST)) {
     $title = $_POST['title'];
     $message = $_POST['message'];
 
-    $sql = "UPDATE users SET title='$title', message='$message' WHERE id=$userId";
-    mysqli_query($mysqli, $sql);
+	$sql = "UPDATE users SET title=?, message=? WHERE id=$userId";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("ss", $title, $message);
+	$stmt->execute();
+
+	$results = $stmt->get_result();
 
     header("Location: http://localhost:8080/main.php");
 }

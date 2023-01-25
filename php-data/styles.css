@@ -17,4 +17,12 @@ body {
     background-color: white;
     padding: 4px;
     border-radius: 5px;
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.logOutBtn {
+    height: 21px;
 }
